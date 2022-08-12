@@ -1,0 +1,172 @@
+:root {
+    --step-animation-time: 1s;
+    --bar-animation-time: 0.25s;
+    --default-background-color: #a8a8a8;
+    --background-color: #f5d2be;
+    --text-color: #242424;
+    --text-neutral: #e8e8e8;
+    --active-background: #07e78e;
+}
+
+.checkout-steps {
+    box-sizing: border-box;
+    min-height: 25px;
+    height: fit-content;
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+    background-color: var(--default-background-color);
+}
+
+.checkout-steps .step {
+    height: 2px;
+    background-color: var(--background-color);
+    opacity: 0.2;
+    width: 100%;
+    margin-bottom: 1.4rem;
+}
+
+.checkout-steps .step.active {
+    opacity: 1;
+    background-color: transparent;
+    position: relative;
+}
+
+.checkout-steps .step.active::before {
+    content: "";
+    position: absolute;
+    opacity: 0.2;
+    height: 1px;
+    width: 100%;
+    background-color: var(--background-color);
+}
+
+.checkout-steps .step.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 1px;
+    background-color: var(--active-background);
+    width: 100%;
+}
+
+.checkout-steps .step.active.animation-step::after {
+    width: 0;
+    animation: fillStep 1.5s forwards;
+}
+
+.checkout-steps .current-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+}
+
+.checkout-steps .current-step-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--background-color);
+    opacity: 0.4;
+    border-radius: 50%;
+    margin-bottom: 1.4rem;
+}
+
+.current-step.active .current-step-container {
+    background-color: transparent;
+    opacity: 1;
+    color: var(--default-background-color);
+    position: relative;
+}
+
+.current-step-container span {
+    color: var(--text-color);
+}
+
+.current-step.active .current-step-container span {
+    z-index: 3;
+}
+
+.current-step.active .current-step-container span.last-step {
+    font-size: 1.5rem;
+}
+
+.current-step.active .current-step-container::before {
+    content: "";
+    position: absolute;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    z-index: 0;
+}
+
+.current-step.active .current-step-container::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-color: var(--active-background);
+    z-index: 1;
+}
+
+.current-step.active .animation-bar.current-step-container::after {
+    height: 0;
+    animation: fillBar var(--bar-animation-time) forwards;
+    animation-delay: var(--step-animation-time);
+}
+
+.current-step.active .current-step p {
+    opacity: 1;
+    text-transform: capitalize;
+}
+
+.current-step > p {
+    min-width: 75px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text-neutral);
+    text-transform: capitalize;
+    position: absolute;
+    top: 2.9rem;
+}
+
+.current-step.active p {
+    position: absolute;
+    top: 2.9rem;
+    line-height: 1rem;
+    color: var(--text-color);
+    opacity: 1;
+}
+
+.current-step:last-child {
+    display: none;
+}
+
+@keyframes fillBar {
+    from {
+        height: 0;
+    }
+    to {
+        height: 100%;
+    }
+}
+@keyframes fillStep {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
