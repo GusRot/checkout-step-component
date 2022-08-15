@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { indexOf } from "lodash";
 import logo from "./logo.svg";
 import "./App.css";
 import CheckoutStep from "./CheckoutStep";
 import "./styles/global.css";
 import { Status } from "./Types";
+import Button from "./Button";
 
 const stepOptions = ["Entrega", "Pagamento", "Finalizado"];
 
@@ -19,7 +19,7 @@ function App() {
             "finished",
             "canceled",
         ];
-        const index = indexOf(options, step);
+        const index = options.indexOf(step);
 
         setStep(options[index + i]);
     }
@@ -29,8 +29,7 @@ function App() {
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <CheckoutStep status={step} stepOptions={stepOptions} />
-                <button onClick={() => handleStep(-1)}>Voltar Etapa</button>
-                <button onClick={() => handleStep(1)}>Avançar Etapa</button>
+                <Button handleStep={handleStep} step={step} />
             </header>
         </div>
     );

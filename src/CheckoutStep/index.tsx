@@ -1,4 +1,3 @@
-import { indexOf } from "lodash";
 import { CheckoutStepProps, StatusProgress } from "../Types";
 import "./style.css";
 
@@ -20,7 +19,7 @@ const CheckoutStep = ({ status, stepOptions }: CheckoutStepProps) => {
                             statusProgress[status] === newStep;
                         const lastStepActive =
                             index <
-                            indexOf(stepOptions, statusProgress[status]);
+                            stepOptions.indexOf(String(statusProgress[status]));
                         const active = activeCurrent || lastStepActive;
                         const classNameStep = active ? "active step" : "step";
 

@@ -56,7 +56,7 @@
 
 .checkout-steps .step.active.animation-step::after {
     width: 0;
-    animation: fillStep 1.5s forwards;
+    animation: fillStep var(--step-animation-time) forwards;
 }
 
 .checkout-steps .current-step {
@@ -78,6 +78,7 @@
     opacity: 0.4;
     border-radius: 50%;
     margin-bottom: 1.4rem;
+    transition: opacity var(--step-animation-time);
 }
 
 .current-step.active .current-step-container {
@@ -122,6 +123,7 @@
 
 .current-step.active .animation-bar.current-step-container::after {
     height: 0;
+    opacity: 0.3;
     animation: fillBar var(--bar-animation-time) forwards;
     animation-delay: var(--step-animation-time);
 }
@@ -157,9 +159,11 @@
 @keyframes fillBar {
     from {
         height: 0;
+        opacity: 0.3;
     }
     to {
         height: 100%;
+        opacity: 1;
     }
 }
 @keyframes fillStep {
